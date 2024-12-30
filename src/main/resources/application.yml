@@ -1,3 +1,31 @@
+server:
+  port: 8062
+
 spring:
   application:
     name: transporter-management
+  profiles:
+    active: dev
+  lifecycle:
+    timeout-per-shutdown-phase: "90s"
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 30000
+      idle-timeout: 1800000
+      max-lifetime: 3600000
+      minimum-idle: 2
+      pool-name: LbsBackendServiceHikariCP
+  jpa:
+    database-platform: postgres
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
